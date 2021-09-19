@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>STP Task for 2022 Recruitement</title>
+    </head>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .banner{
+            position: relative;
+            width: 100%;
+        }
+        .banner img{
+            width: 100%;
+        }
+        .banner .vision{
+            position: absolute;
+            top: 10px;
+            width: 1092px;
+            border: 2px solid blueviolet;
+            border-radius: 25px;
+            padding: 13px;
+            margin: 30px;
+        }
+        .banner .mission{
+            position: absolute;
+            top: 90px;
+            width: 1048px;
+            border: 2px solid cadetblue;
+            border-radius: 25px;
+            padding: 13px;
+            margin: 30px;
+        }
+        .banner .overview{
+            position: absolute;
+            top: 226px;
+            width: 1028px;
+            border: 2px solid goldenrod;
+            border-radius: 25px;
+            padding: 13px;
+            margin: 30px; 
+        }
+        .textcolor{
+            position: absolute;
+            border-radius: 25px;
+            top: 340px;
+            width: 500px;
+            margin: 13px;
+            padding: 30px;
+        }
+        .textcolor #color{
+            position: absolute;
+            left: 480px;
+            top: 44px;
+        }
+        .textcolor #button{
+            position: absolute;
+            left: 655px;
+            top: 20px;
+            background-color: lightblue;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            border-color: lightblue;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 18px;
+        }
+        .textcolor .paragraph{
+            position: absolute;
+            left: 15px;
+            font-style: oblique ;
+            text-decoration: underline;
+        }
+        .textcolor input,
+        label {
+            margin: .4rem 0;
+            top: 90px;
+            left: 173px;
+            position: absolute;
+        }
+        .textcolor #finish_date{
+            left: 554px;
+            top: 90px;
+        }
+        .textcolor #countdown{
+            text-align: center;
+            font-size: 60px;
+            margin-top: 123px;
+            margin-left: 80px;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="banner" id="text" >
+                <img src="stps.jpg" alt="background image">
+                <h2 class="vision">STP Vision:"Being a leading organization working on developing youth who will lead the positive change."</h2>
+                <h2 class="mission">STP Mission:"To develop youth in various fields personally and technically through academic programs, projects, and events in a values oriented system, to take our part in providing a generation capable of playing its roles effictively towards itself, community and country."</h2>
+                <h2 class="overview">An Overview:"STP was founded in 2006 at Cairo university; The purpose of STP is to strengthen the leadership, skills, effectiveness and efficiency of involved people; enabling them to further enrich the quality of the community and their personal life."</h2>
+            </div>
+                <div class="textcolor">
+                <h1 class="paragraph" id="paragraph">Choose color to change text color:</h1>
+                <input type="text"  id="color" >
+                <button id="button"onclick="changeColor()" value="Click to Change Color">Change</button>
+                <label for="start" style="top: 80px ; left: 10px; "><h1>Start date:</h1></label>
+                <input type="datetime-local" id="start_date" onchange='timeDifference()'>
+                <label for="end" style="top: 80px ; left: 400px; " id="now"><h1>End date:</h1></label>
+                <input type="datetime-local" id="finish_date" onchange='timeDifference()'>
+                <p id="countdown"></p>
+                </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function changeColor(){
+            let color = document.getElementById("color").value;
+            document.body.style.color = color;
+        }
+        function timeDifference(){
+            var finish_date= document.getElementById("finish_date").value;
+            var start_date = document.getElementById("start_date").value;
+
+            if(start_date == '' || finish_date == ''){
+            return
+            //won't show the date if one of the two fields wasn't changed
+            }
+
+            finish_date = new Date(finish_date);
+            start_date = new Date(start_date);
+            var difference = finish_date - start_date;
+
+            var timeFunction = setInterval(function() {
+            var day = Math.floor(difference / (1000 * 60 * 60 * 24));
+            var hour = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minute = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            var second = Math.floor((difference % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = day + "d " + hour + "h "
+            + minute + "m " + second + "s ";
+            difference = difference - 1000;
+
+            if (difference < 0) {
+                clearInterval(timeFunction);
+                document.getElementById("countdown").innerHTML = "An Expired date!!";
+            }
+            }, 1000);
+            }
+    </script>
+</html>
